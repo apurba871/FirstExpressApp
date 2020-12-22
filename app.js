@@ -16,8 +16,28 @@ app.get("/bye", function(req, res) {
 });
 
 // "/meooow" : "Greetings master"
+
 app.get("/meooow", function(req, res) {
 	res.send("Hello meooow25, long time no see...");
+});
+
+// "/r/<any_thing>" : "Subreddit Homepage"
+
+app.get("/r/:subredditName", function(req, res) {
+	var subreddit = req.params.subredditName;
+	res.send("Welcome to the " + subreddit.toUpperCase() + " subreddit");
+});
+
+// "/r/.../comments/.../..." : "Comments page of a subreddit post"
+
+app.get("/r/:subredditName/comments/:id/:title", function(req, res) {
+	console.log(req.params);
+	res.send("Welcome to the comments page");
+})
+
+// "*" : "Bad Req"
+app.get("*", function(req, res) {
+	res.send("Error: 404");
 });
 
 app.listen(3000, function() {
